@@ -52,9 +52,10 @@ class Deque<T> {
     public last(): T {
         let iterator: Iterator<T> = this.reverseIterator();
         let item: T = null;
-        do {
+
+        while (iterator.hasNext() && (item === null || item === undefined)) {
             item = iterator.next();
-        } while (iterator.hasNext() && (item === null || item === undefined));
+        }
 
         return item;
     }
@@ -121,7 +122,7 @@ class Deque<T> {
     public iterate(fn: IDequeIteratorFunction<T>): void {
         if (!fn) return null;
 
-        for (let i: number = this.getLowerBound(); i <= this.getUpperBound() - 1; i++) {
+        for (let i: number = this.getLowerBound(); i < this.getUpperBound(); i++) {
             fn(this.get(i), i);
         }
     }
@@ -137,7 +138,7 @@ class Deque<T> {
     public iterator(): Iterator<T> {
         let arr: Array<T> = [];
 
-        for (let i: number = this._lowerBound; i <= this._upperBound; i++) {
+        for (let i: number = this._lowerBound; i < this._upperBound; i++) {
             arr.push(this._data[i]);
         }
 
@@ -147,7 +148,7 @@ class Deque<T> {
     public reverseIterator(): Iterator<T> {
         let arr: Array<T> = [];
 
-        for (let i: number = this._lowerBound; i <= this._upperBound; i++) {
+        for (let i: number = this._lowerBound; i < this._upperBound; i++) {
             arr.push(this._data[i]);
         }
 
@@ -173,13 +174,13 @@ class Deque<T> {
         }
 
         this._lowerBound = lowest;
-        this._upperBound = highest;
+        this._upperBound = highest + 1;
     }
 
     public toArray(recursive: boolean = false): Array<T> {
         let arr: Array<T> = [];
 
-        for (let i = this.getLowerBound(); i <= this.getUpperBound(); i++) {
+        for (let i = this.getLowerBound(); i < this.getUpperBound(); i++) {
             if (recursive) {
                 let item: T = this.get(i);
                 if (item instanceof Deque) {

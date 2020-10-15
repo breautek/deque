@@ -26,9 +26,9 @@ import {Deque} from '../src/Deque';
 import {Iterator} from '@breautek/iterator';
 
 describe('Deque', () => {
-    var deque: Deque<number>;
+    let deque: Deque<number>;
 
-    const setup = (): void => {
+    let setup = (): void => {
         deque = new Deque<number>();
         deque.push(1);
         deque.push(3);
@@ -137,16 +137,16 @@ describe('Deque', () => {
             expect(result.last()).toBe(100);
         });
 
-        it('upper bound is 100', () => {
-            expect(result.getUpperBound()).toBe(100);
+        it('upper bound is 101', () => {
+            expect(result.getUpperBound()).toBe(101);
         });
 
         it('count is 4', () => {
             expect(result.count()).toBe(4);
         });
 
-        it('length is 100', () => {
-            expect(result.length()).toBe(100);
+        it('length is 101', () => {
+            expect(result.length()).toBe(101);
         });
     });
 
@@ -300,14 +300,14 @@ describe('Deque', () => {
     });
 
     it('iterate', () => {
-        const spy: jasmine.Spy = jasmine.createSpy('iterator spy');
+        let spy: jasmine.Spy = jasmine.createSpy('iterator spy');
         deque.iterate(spy);
 
         expect(spy).toHaveBeenCalledTimes(3);
 
-        const args0: Array<number> = spy.calls.argsFor(0);
-        const args1: Array<number> = spy.calls.argsFor(1);
-        const args2: Array<number> = spy.calls.argsFor(2);
+        let args0: Array<number> = spy.calls.argsFor(0);
+        let args1: Array<number> = spy.calls.argsFor(1);
+        let args2: Array<number> = spy.calls.argsFor(2);
 
         expect(args0[1]).withContext('Iteration #0').toBe(0);
         expect(args0[0]).withContext('Iteration #0').toBe(1);
@@ -320,14 +320,14 @@ describe('Deque', () => {
     });
 
     it('reverse iterate', () => {
-        const spy: jasmine.Spy = jasmine.createSpy('iterator spy');
+        let spy: jasmine.Spy = jasmine.createSpy('iterator spy');
         deque.reverseIterate(spy);
 
         expect(spy).toHaveBeenCalledTimes(3);
 
-        const args0: Array<number> = spy.calls.argsFor(2);
-        const args1: Array<number> = spy.calls.argsFor(1);
-        const args2: Array<number> = spy.calls.argsFor(0);
+        let args0: Array<number> = spy.calls.argsFor(2);
+        let args1: Array<number> = spy.calls.argsFor(1);
+        let args2: Array<number> = spy.calls.argsFor(0);
 
         expect(args0[1]).withContext('Iteration #0').toBe(0);
         expect(args0[0]).withContext('Iteration #0').toBe(1);
@@ -341,11 +341,11 @@ describe('Deque', () => {
 
     describe('iterator', () => {
         setup();
-        const iterator: Iterator<number> = deque.iterator();
+        let iterator: Iterator<number> = deque.iterator();
 
-        const result0: number = iterator.next();
-        const result1: number = iterator.next();
-        const result2: number = iterator.next();
+        let result0: number = iterator.next();
+        let result1: number = iterator.next();
+        let result2: number = iterator.next();
 
         it('Iteration #0', () => {
             expect(result0).toBe(1);
@@ -360,25 +360,23 @@ describe('Deque', () => {
         });
     });
 
-    // Disabled because of a breaking change required to make this
-    // work as expected...
-    xdescribe('reverseIterator', () => {
+    describe('reverseIterator', () => {
         setup();
-        const iterator: Iterator<number> = deque.reverseIterator();
+        let iterator: Iterator<number> = deque.reverseIterator();
 
-        const result0: number = iterator.next();
-        const result1: number = iterator.next();
-        const result2: number = iterator.next();
+        let result0: number = iterator.next();
+        let result1: number = iterator.next();
+        let result2: number = iterator.next();
 
-        xit('Iteration #0', () => {
+        it('Iteration #0', () => {
             expect(result0).toBe(5);
         });
 
-        xit('Iteration #1', () => {
+        it('Iteration #1', () => {
             expect(result1).toBe(3);
         });
 
-        xit('Iteration #2', () => {
+        it('Iteration #2', () => {
             expect(result2).toBe(1);
         });
     });
@@ -386,7 +384,7 @@ describe('Deque', () => {
     describe('toArray()', () => {
         setup();
 
-        const arr: Array<number> = deque.toArray();
+        let arr: Array<number> = deque.toArray();
 
         it('Element #0', () => {
             expect(arr[0]).toBe(1);
@@ -404,7 +402,7 @@ describe('Deque', () => {
     describe('toArray(true)', () => {
         setup();
 
-        const arr: Array<number> = deque.toArray(true);
+        let arr: Array<number> = deque.toArray(true);
 
         it('Element #0', () => {
             expect(arr[0]).toBe(1);

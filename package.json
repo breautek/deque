@@ -37,7 +37,7 @@
   "homepage": "https://github.com/breautek/deque.git",
   "dependencies": {
     "@breautek/eslint-plugin": "4.0.0",
-    "@breautek/iterator": "2.0.1",
+    "@breautek/iterator": "3.0.0",
     "@types/node": "12.12.67",
     "source-map-support": "0.5.19",
     "tslib": "2.0.3"
