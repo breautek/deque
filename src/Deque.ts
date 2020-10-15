@@ -40,8 +40,8 @@ class Deque<T> {
     }
 
     public first(): T {
-        var iterator: Iterator<T> = this.iterator();
-        var item: T = null;
+        let iterator: Iterator<T> = this.iterator();
+        let item: T = null;
         do {
             item = iterator.next();
         } while (iterator.hasNext() && (item === null || item === undefined));
@@ -50,8 +50,8 @@ class Deque<T> {
     }
 
     public last(): T {
-        var iterator: Iterator<T> = this.reverseIterator();
-        var item: T = null;
+        let iterator: Iterator<T> = this.reverseIterator();
+        let item: T = null;
         do {
             item = iterator.next();
         } while (iterator.hasNext() && (item === null || item === undefined));
@@ -105,14 +105,14 @@ class Deque<T> {
     }
 
     public shift(): T {
-        var data: T = this._data[this._lowerBound];
+        let data: T = this._data[this._lowerBound];
         delete this._data[this._lowerBound];
         this._lowerBound++;
         return data;
     }
 
     public pop(): T {
-        var data: T = this._data[this._upperBound - 1];
+        let data: T = this._data[this._upperBound - 1];
         delete this._data[this._upperBound - 1];
         this._upperBound--;
         return data;
@@ -127,7 +127,7 @@ class Deque<T> {
     }
 
     public reverseIterate(fn: IDequeIteratorFunction<T>): void {
-        if(!fn) return null;
+        if (!fn) return null;
 
         for (let i: number = this.getUpperBound() - 1; i >= this.getLowerBound(); i--) {
             fn(this.get(i), i);
@@ -135,7 +135,7 @@ class Deque<T> {
     }
 
     public iterator(): Iterator<T> {
-        var arr: Array<T> = [];
+        let arr: Array<T> = [];
 
         for (let i: number = this._lowerBound; i <= this._upperBound; i++) {
             arr.push(this._data[i]);
@@ -145,7 +145,7 @@ class Deque<T> {
     }
 
     public reverseIterator(): Iterator<T> {
-        var arr: Array<T> = [];
+        let arr: Array<T> = [];
 
         for (let i: number = this._lowerBound; i <= this._upperBound; i++) {
             arr.push(this._data[i]);
@@ -155,13 +155,13 @@ class Deque<T> {
     }
 
     private _syncBoundaries(): void {
-        var keys: Array<string> = Object.keys(this._data);
+        let keys: Array<string> = Object.keys(this._data);
 
-        var lowest: number = Infinity
-        var highest: number = -Infinity;
+        let lowest: number = Infinity
+        let highest: number = -Infinity;
 
-        for (var i: number = 0; i < keys.length; i++) {
-            var index = parseInt(keys[i]);
+        for (let i: number = 0; i < keys.length; i++) {
+            let index = parseInt(keys[i]);
 
             if (index < lowest) {
                 lowest = index;
@@ -177,11 +177,11 @@ class Deque<T> {
     }
 
     public toArray(recursive: boolean = false): Array<T> {
-        var arr: Array<T> = [];
+        let arr: Array<T> = [];
 
         for (let i = this.getLowerBound(); i <= this.getUpperBound(); i++) {
             if (recursive) {
-                var item: T = this.get(i);
+                let item: T = this.get(i);
                 if (item instanceof Deque) {
                     // any is used here because we don't care about the subtype of child Deque here.
                     // however, Typescript won't allow us to push the type to the possibile difference 
