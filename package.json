@@ -1,6 +1,6 @@
 {
   "name": "@breautek/deque",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Iterator implementation",
   "main": "lib/Deque.js",
   "types": "lib/Deque.d.ts",
