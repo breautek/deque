@@ -39,7 +39,6 @@
     "@breautek/eslint-plugin": "4.0.0",
     "@breautek/iterator": "3.0.1",
     "@types/node": "12.19.15",
-    "source-map-support": "0.5.19",
     "tslib": "2.1.0"
   },
   "devDependencies": {
