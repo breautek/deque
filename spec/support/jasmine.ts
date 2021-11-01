@@ -2,9 +2,7 @@
 import Jasmine = require('jasmine');
 import {SpecReporter, StacktraceOption} from 'jasmine-spec-reporter';
 
-let jasmine = new Jasmine({
-    suppressLoadErrors: false
-});
+let jasmine = new Jasmine({});
 
 let spec: string = process.argv[2] ? process.argv[2] : '**/*[sS]pec.ts';
 
