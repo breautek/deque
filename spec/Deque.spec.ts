@@ -267,7 +267,7 @@ describe('Deque', () => {
         });
     });
 
-    describe('shift()', () => {
+    describe('pop()', () => {
         let result: number;
         beforeEach(() => {
             setup();
@@ -305,9 +305,9 @@ describe('Deque', () => {
 
         expect(spy).toHaveBeenCalledTimes(3);
 
-        let args0: Array<number> = spy.calls.argsFor(0);
-        let args1: Array<number> = spy.calls.argsFor(1);
-        let args2: Array<number> = spy.calls.argsFor(2);
+        let args0: number[] = spy.calls.argsFor(0);
+        let args1: number[] = spy.calls.argsFor(1);
+        let args2: number[] = spy.calls.argsFor(2);
 
         expect(args0[1]).withContext('Iteration #0').toBe(0);
         expect(args0[0]).withContext('Iteration #0').toBe(1);
@@ -325,9 +325,9 @@ describe('Deque', () => {
 
         expect(spy).toHaveBeenCalledTimes(3);
 
-        let args0: Array<number> = spy.calls.argsFor(2);
-        let args1: Array<number> = spy.calls.argsFor(1);
-        let args2: Array<number> = spy.calls.argsFor(0);
+        let args0: number[] = spy.calls.argsFor(2);
+        let args1: number[] = spy.calls.argsFor(1);
+        let args2: number[] = spy.calls.argsFor(0);
 
         expect(args0[1]).withContext('Iteration #0').toBe(0);
         expect(args0[0]).withContext('Iteration #0').toBe(1);
@@ -384,7 +384,7 @@ describe('Deque', () => {
     describe('toArray()', () => {
         setup();
 
-        let arr: Array<number> = deque.toArray();
+        let arr: number[] = deque.toArray();
 
         it('Element #0', () => {
             expect(arr[0]).toBe(1);
@@ -402,7 +402,7 @@ describe('Deque', () => {
     describe('toArray(true)', () => {
         setup();
 
-        let arr: Array<number> = deque.toArray(true);
+        let arr: number[] = deque.toArray(true);
 
         it('Element #0', () => {
             expect(arr[0]).toBe(1);

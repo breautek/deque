@@ -29,14 +29,14 @@ export interface IDequeIteratorFunction<T> {
 }
 
 class Deque<T> {
-    private _data: {[key: string]: T};
-    private _lowerBound: number;
-    private _upperBound: number;
+    private $data: {[key: string]: T};
+    private $lowerBound: number;
+    private $upperBound: number;
 
     public constructor() {
-        this._data = {};
-        this._lowerBound = 0;
-        this._upperBound = 0;
+        this.$data = {};
+        this.$lowerBound = 0;
+        this.$upperBound = 0;
     }
 
     public first(): T {
@@ -61,29 +61,29 @@ class Deque<T> {
     }
 
     public getLowerBound(): number {
-        return this._lowerBound;
+        return this.$lowerBound;
     }
 
     public getUpperBound(): number {
-        return this._upperBound;
+        return this.$upperBound;
     }
 
     public unshift(item: T): Deque<T> {
-        this._data[--this._lowerBound] = item;
+        this.$data[--this.$lowerBound] = item;
         return this;
     }
 
     public push(item: T): Deque<T> {
-        this._data[this._upperBound++] = item;
+        this.$data[this.$upperBound++] = item;
         return this;
     }
 
     public count(): number {
-        return Object.keys(this._data).length;
+        return Object.keys(this.$data).length;
     }
 
     public length(): number {
-        return Math.abs(this._lowerBound - this._upperBound);
+        return Math.abs(this.$lowerBound - this.$upperBound);
     }
 
     public set(index: number, item: T): Deque<T> {
@@ -91,31 +91,31 @@ class Deque<T> {
             throw new Error('Index must be an integer.');
         }
 
-        this._data[index] = item;
-        this._syncBoundaries();
+        this.$data[index] = item;
+        this.$syncBoundaries();
 
         return this;
     }
 
     public has(index: number): boolean {
-        return this._data[index] !== undefined;
+        return this.$data[index] !== undefined;
     }
 
     public get(index: number): T {
-        return this._data[index];
+        return this.$data[index];
     }
 
     public shift(): T {
-        let data: T = this._data[this._lowerBound];
-        delete this._data[this._lowerBound];
-        this._lowerBound++;
+        let data: T = this.$data[this.$lowerBound];
+        delete this.$data[this.$lowerBound];
+        this.$lowerBound++;
         return data;
     }
 
     public pop(): T {
-        let data: T = this._data[this._upperBound - 1];
-        delete this._data[this._upperBound - 1];
-        this._upperBound--;
+        let data: T = this.$data[this.$upperBound - 1];
+        delete this.$data[this.$upperBound - 1];
+        this.$upperBound--;
         return data;
     }
 
@@ -136,27 +136,27 @@ class Deque<T> {
     }
 
     public iterator(): Iterator<T> {
-        let arr: Array<T> = [];
+        let arr: T[] = [];
 
-        for (let i: number = this._lowerBound; i < this._upperBound; i++) {
-            arr.push(this._data[i]);
+        for (let i: number = this.$lowerBound; i < this.$upperBound; i++) {
+            arr.push(this.$data[i]);
         }
 
         return new Iterator(arr);
     }
 
     public reverseIterator(): Iterator<T> {
-        let arr: Array<T> = [];
+        let arr: T[] = [];
 
-        for (let i: number = this._lowerBound; i < this._upperBound; i++) {
-            arr.push(this._data[i]);
+        for (let i: number = this.$lowerBound; i < this.$upperBound; i++) {
+            arr.push(this.$data[i]);
         }
 
         return new Iterator(arr.reverse());
     }
 
-    private _syncBoundaries(): void {
-        let keys: Array<string> = Object.keys(this._data);
+    private $syncBoundaries(): void {
+        let keys: string[] = Object.keys(this.$data);
 
         let lowest: number = Infinity
         let highest: number = -Infinity;
@@ -173,12 +173,12 @@ class Deque<T> {
             }
         }
 
-        this._lowerBound = lowest;
-        this._upperBound = highest + 1;
+        this.$lowerBound = lowest;
+        this.$upperBound = highest + 1;
     }
 
-    public toArray(recursive: boolean = false): Array<T> {
-        let arr: Array<T> = [];
+    public toArray(recursive: boolean = false): T[] {
+        let arr: T[] = [];
 
         for (let i = this.getLowerBound(); i < this.getUpperBound(); i++) {
             if (recursive) {
@@ -187,7 +187,7 @@ class Deque<T> {
                     // any is used here because we don't care about the subtype of child Deque here.
                     // however, Typescript won't allow us to push the type to the possibile difference 
                     // between our T and their T
-                    arr.push((<any>item).toArray(recursive));
+                    arr.push((item as any).toArray(recursive));
                 }
                 else {
                     arr.push(item);
